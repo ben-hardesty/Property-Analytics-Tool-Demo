@@ -25,33 +25,6 @@ NOTE: This is a minimal "**case-study**" copy of the main project. The **full co
   - `v_prices`, `v_rents`, `v_sold_prices`, `v_crime`
 - **Automation included** — GitHub Actions run the **Daily ETL** (updates a rolling `db-latest` release) and a **Weekly backup** (dated zip artifact).
 
-### Current focus
-
-A lean set of endpoints to build a consistent, filterable time series:
-
-- **Asking Prices** (`prices`)
-- **Asking Rents (long-let)** (`rents`)
-- **Sold Prices** (`sold_prices`)
-- **Crime** (`crime`)
-
-### What’s New
-
-#### September 2025
-
-- **Cohort-driven ETL** — Postcodes live in config/cohorts.yaml, synced into dim_cohort & dim_cohort_member.
-- **Daily job** — scripts/daily_etl.py batches selected endpoints per postcode, respects vendor rate limits (4 calls / 10s), persists to SQLite, and archives JSON.
-**Richer DB metadata** — Columns like request_params, run_id, context_postcode, and denormalised helpers ready for analytics modeling.
-**CI workflows** — Daily ETL (scheduled + manual) and Weekly DB backup (scheduled + runs after Sunday ETL).
-
-#### October 2025
-
-- **Postcode-aware dedupe** — unique index on `(endpoint_name, context_postcode, checksum)`.
-- **Stable checksums** — hash a projection that drops volatile fields (`process_time`, `url`) and focuses on each endpoint’s core payload.
-- **Denormalised helpers** — ETL populates `anchor_postcode_*`, `effective_radius_mi`, `points_requested`, `max_age_months`, and a radius reasonableness flag.
-- **Analytics views** — `v_prices`, `v_rents`, `v_sold_prices`, `v_crime` created idempotently in `init_db()`.
-- **Focused endpoints** — initial dataset concentrates on: `prices`, `rents`, `sold_prices`, `crime`.
-- **Cohorts** — expanded Norwich & Norfolk (NR1–NR15) seed pool.
-
 ---
 
 ## Project Structure
