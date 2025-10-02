@@ -1,4 +1,4 @@
-# Property Analytics Tool (PAT) — README
+# Property Analytics Tool (Demo) — README
 
 NOTE: This is a minimal "**case-study**" copy of the main project. The **full codebase is private** and available on request.
 
